@@ -6,6 +6,8 @@ export default function Hello() {
         { title: 'Swim',emoji: '🏊'}, 
         { title: 'Run' ,emoji: '🏃'},
         { title: 'Golf', emoji: '🏌'},
+        { title: 'Soccer',emoji: null},
+        { title: 'Tennis'}
         ]
     
     return (
@@ -16,16 +18,18 @@ export default function Hello() {
         <Age value={2} />
         <li> Hobbies:
             <ol>
-             {hobbies.map((hobby)=>{
-                return <li>{hobby.emoji} {hobby.title}</li>
-             })}
-             
-             
+            {/* {hobbies.filter((hobbyItem)=> ((hobbyItem.emoji != null) || (hobbyItem.emoji != undefined)))                  */}
+            {/* .map((hobby) => {  */}
+               {/* return <li>{hobby.emoji} {hobby.title}</li>  */}
+              {/* })}   */}
+              { hobbies.map((hobby)=>{
+                if((hobby.emoji!=null) || (hobby.emoji != undefined)){
+                    return <li>{hobby.emoji} {hobby.title}</li>
+                }
+              })}
             </ol>
         </li>
     </ol>
-    
-    
     </div>
-    );
+    )
 }
