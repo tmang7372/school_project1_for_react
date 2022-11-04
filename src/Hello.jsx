@@ -1,19 +1,26 @@
-import Hobby from "./Hobby";
 import { TitleLi } from "./Hobby";
+import Age from "./Age";
 
 export default function Hello() {
+    const hobbies = [
+        { title: 'Swim',emoji: '🏊'}, 
+        { title: 'Run' ,emoji: '🏃'},
+        { title: 'Golf', emoji: '🏌'},
+        ]
+    
     return (
     <div>
     <h1>Hello, this is a page about me!</h1>
     <ol>
         <TitleLi title={'Name'} text={'Jeremiah Ang'} />
-        <TitleLi title={'Age'}  text={18} />
-        <li> Hobbies:</li>
-        <li>
+        <Age value={2} />
+        <li> Hobbies:
             <ol>
-             <Hobby title="Swim" emoji={<span>&#127946;</span>} />
-              <Hobby title="Run" emoji={<span>&#128007;</span>}/>
-              <Hobby title="Game" emoji={<span>&#128013;</span>}/>
+             {hobbies.map((hobby)=>{
+                return <li>{hobby.emoji} {hobby.title}</li>
+             })}
+             
+             
             </ol>
         </li>
     </ol>

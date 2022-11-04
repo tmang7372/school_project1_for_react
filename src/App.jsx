@@ -1,9 +1,10 @@
 import Hello from './Hello';
 
 function App(props) {
+       
     return (
         <div>
-            <Hello />
+           <Hello/>
         </div>
     );
 }
