@@ -1,10 +1,12 @@
-import Hello from './Hello';
+import Hello from './Practical 2/Hello';
+import RockPaperScissors from './Practical 5/RockPaperScissors';
 
 function App(props) {
        
     return (
         <div>
            <Hello/>
+           <RockPaperScissors/>
         </div>
     );
 }

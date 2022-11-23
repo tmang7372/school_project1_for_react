@@ -1,5 +1,5 @@
-import { TitleLi } from "./Hobby";
-import Age from "./Age";
+import { TitleLi } from "../Practical 3/Hobby";
+import Age from "../Practical 4/Age";
 
 export default function Hello() {
     const hobbies = [
@@ -15,7 +15,7 @@ export default function Hello() {
     <h1>Hello, this is a page about me!</h1>
     <ol>
         <TitleLi title={'Name'} text={'Jeremiah Ang'} />
-        <Age value={2} />
+        <Age value={21} />
         <li> Hobbies:
             <ol>
             {/* {hobbies.filter((hobbyItem)=> ((hobbyItem.emoji != null) || (hobbyItem.emoji != undefined)))                  */}
