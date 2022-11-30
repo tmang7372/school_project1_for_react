@@ -4,9 +4,9 @@ export default function RPSRecords(props) {
     if(props.records.length == 0 ){
         props.percentage = 0;
     }else {
-       alert("inside if loop")
+       
 		for(let i=0;i<props.records.length;i++){
-        console.log("inside for loop")  
+         
 		if(props.records[i].result=="Win"){
 	         alert("inside if");
 	         total = total+1;
