@@ -6,7 +6,7 @@ export default function LoggedInForm(props) {
     <div
       style={{
         width: "280px",
-        height: "215px",
+        height: "230px",
         marginTop: "40px",
         marginLeft: "auto",
         marginRight: "auto",
@@ -18,15 +18,15 @@ export default function LoggedInForm(props) {
       <div
         style={{
           width: "240px",
-          height: "180px",
+          height: "200px",
           marginTop: "10px",
-          marginBottom: "30px",
           marginRight: "auto",
           marginLeft: "auto",
           borderRadius: "5px",
           backgroundColor: "#93e6f1",
         }}
       >
+        <form>
         <h1
           style={{
             textAlign: "center",
@@ -58,7 +58,6 @@ export default function LoggedInForm(props) {
             borderRadius: "5px",
           }}
           type={"text"}
-          value={username}
           onChange={(event) => setusername(event.target.value)}
         ></input>
         <label
@@ -87,21 +86,24 @@ export default function LoggedInForm(props) {
           onChange={(event) => {
             setpassword(event.target.value);
           }}
+          autocomplete={"on"}
         ></input>
-        <button
+        <input
+          type={"submit"}
           value={"On Submit"}
           style={{
             clear: "left",
             float: "left",
-            marginLeft: "25%",
-            width: "20%",
+            marginLeft: "30%",
+            width: "40%",
             height: "10%",
             color: "black",
             backgroundColor: "#fcf633", 
             border: "1px solid #fbf50f",
             borderRadius: "2px"
           }}
-          onClick={() => {
+          onClick={(event) => {
+            event.preventDefault();
             if (
               password === undefined ||
               password === null ||
@@ -126,7 +128,8 @@ export default function LoggedInForm(props) {
               props.setIsLoggedIn(false);
             }
           }}
-        ></button>
+        ></input>
+        </form>
       </div>
     </div>
   );
