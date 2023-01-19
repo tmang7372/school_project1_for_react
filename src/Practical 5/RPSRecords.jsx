@@ -1,35 +1,32 @@
 import recordsReducer from "../Practical 7/RecordsReducer";
 import { IsEmojiContext, emoji } from '../Practical 7/IsEmojiContext.js';
-import {IsRecordContext} from './RockPaperScissors';
+// import {IsRecordContext} from './RockPaperScissors';
+import { useSelector, useDispatch } from 'react-redux';
+import { remove } from '../Practical 9/recordSlice'  
 
 export default function RPSRecords(props) {
 	
-  const record = React.useContext(IsRecordContext);
-  const [records, dispatch] = React.useReducer(recordsReducer, []);
+  // const record = React.useContext(IsRecordContext);
+  // const [records, dispatch] = React.useReducer(recordsReducer, []);
   const isEmoji = React.useContext(IsEmojiContext);
+  
+  const record = useSelector(function(store) {
+    return store.record.value;
+  });
+  
+  const dispatch = useDispatch();
 
-  let total = 0;
-    let percent = 0;
-    if(record.length == 0 ){
-        props.percentage = 0;
-    }else {
-       
-		for(let i=0;i<record.length;i++){
-         
-		if(record[i].result=="Win"){
-	        total = total+1;
-    }
-        percent = (total/record.length*100)
-        
-    }} 
+  const winCount = record.filter((record)=> (record.result === "Win") && (record.move === props.move)).length;
+  const totalCount = record.filter((record)=> (record.move === props.move)).length;
+  const percentage = totalCount > 0 ? (winCount / totalCount * 100) : 0.00;   
 	
   return (
     <div>
-      <p>Rounds:<span>Win % {percent.toFixed(2)}%</span></p>
+      <p>Rounds:<span>Win % {percentage.toFixed(2)}%</span></p>
       <ol>
         {record.map(function (record,index) {
-           return <li>
-            {record.result} ({isEmoji ? emoji[record.move] : record.move}) <button onClick={()=>props.onHide(index)}>Delete</button>
+           return <li key = {index}>
+            {record.result} ({isEmoji ? emoji[record.move] : record.move}) <button onClick={()=>dispatch(remove(index))}>Delete</button>{/*props.onHide(index)*/}
           </li>;
         })}
       </ol>

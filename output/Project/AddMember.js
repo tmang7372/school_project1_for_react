@@ -40,7 +40,7 @@ export default function AddMember({
       "id": idmovie,
       "movie name": nameofmovie,
       "display": displaymovie,
-      "discription": description,
+      "description": description,
       "genre": genre,
       "lead actor": leadActor,
       "rating": rating,

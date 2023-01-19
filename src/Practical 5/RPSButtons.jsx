@@ -1,10 +1,17 @@
 import RPSButton from "./RPSButton";
-import {IsRecordContext} from './RockPaperScissors.jsx';
+// import {IsRecordContext} from './RockPaperScissors.jsx';
+import { useDispatch, useSelector } from 'react-redux';
+import { add } from '../Practical 9/recordSlice'
 
 const moves = ['Rock', 'Paper', 'Scissors'];
 
 export default function RPSButtons(props) {
-  const records = React.useContext(IsRecordContext);
+  // const records = React.useContext(IsRecordContext);
+  const records = useSelector(function (store) {
+    return store.record.value;
+});
+const dispatch = useDispatch();
+
   // return (
   //   <div>
   //     <button onClick = {()=>props.onButtonPressed("Rock")}>Rock</button>
@@ -14,12 +21,19 @@ export default function RPSButtons(props) {
   // );
   return (
     <div>
-      {moves.map((move) => (
+      {moves.map(function(move, index){ 
+       return(
         <RPSButton 
-                 onClick={() => props.onButtonPressed(move)} 
-                 move={move} 
-                 records={records.filter((record) => record.move === move)} >
+                 key = {index}
+                 //onClick={() => props.onButtonPressed(move)} 
+                 //move={move} 
+                 //</div>records={records.filter((record) => record.move === move)} 
+                 records={records.filter((record)=> record.move === move)}
+                        move={move}
+                        onClick={()=>
+                            // dispatch instead of props.onButtonPressed
+                            dispatch(add(move))}>
                   </RPSButton>
-    ))}
+    )})}
     </div>  ) 
 }
