@@ -1,14 +1,22 @@
 /*
- Assignment 1
+ Assignment 2
  Ang Theow Meng
  P7339041
+ I also add some function to ChooseGenre.jsx,
+ AddMember.jsx and Member.jsx
  */
+import { useSelector } from 'react-redux';
+
 export default function LoggedInForm(props) {
   
   //Set the username, role and password of the state
   const [username, setusername] = React.useState("");
   const [password, setpassword] = React.useState("");
   const [role,setrole] = React.useState("")
+  
+  const records = useSelector(function(store) {
+    return store.record.value;
+  });
 
   return (
     <div
@@ -94,7 +102,7 @@ export default function LoggedInForm(props) {
           onChange={(event) => {
             setpassword(event.target.value);
           }}
-          autocomplete={"on"}
+          autoComplete={"on"}
         ></input>
          <label
           style={{

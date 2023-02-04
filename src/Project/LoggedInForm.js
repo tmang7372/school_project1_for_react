@@ -86,7 +86,7 @@ export default function LoggedInForm(props) {
           onChange={(event) => {
             setpassword(event.target.value);
           }}
-          autocomplete={"on"}
+          autoComplete={"on"}
         ></input>
         <input
           type={"submit"}

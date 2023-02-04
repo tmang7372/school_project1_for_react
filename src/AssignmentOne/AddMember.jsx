@@ -1,8 +1,13 @@
 /*
- Assignment 1
+ Assignment 2
  Ang Theow Meng
  P7339041
+ I also add some function to ChooseGenre.jsx,
+ AddMember.jsx and Member.jsx
  */
+import { useSelector, useDispatch } from 'react-redux';
+import { saveaddMovie } from '../AssignmentTwo/recordSlice';
+
 export default function AddMember({ onSubmitHandler, ondeleteHandler }) {
   
   //Set the useState of movieid, nameofmovie, displaympvie, description, genre, leadActor, rating and language
@@ -14,6 +19,10 @@ export default function AddMember({ onSubmitHandler, ondeleteHandler }) {
   const [leadActor, setleadActor] = React.useState("");
   const [rating, setRating] = React.useState("");
   const [language, setlanguage] = React.useState("");
+  const [movieforedit, setmovieforedit] = React.useState("");
+  const [movieforpinned, setmovieforpinned] = React.useState("");
+
+  const dispatch = useDispatch();  
   
   //Set the value of the movieid
   function onChangeId(event) {
@@ -54,6 +63,14 @@ export default function AddMember({ onSubmitHandler, ondeleteHandler }) {
   function onChangeLanguage(event) {
     setlanguage(event.target.value);
   }
+
+  function onChangeMovieForEdit(event){
+    setmovieforedit(even.target.value);
+  }
+
+  function onChangeMovieForPinned(event){
+    setmovieforpinned(even.target.value);
+  }
   
   //Save the movie object to the movie list
   const transferValue = (event) => {
@@ -66,9 +83,12 @@ export default function AddMember({ onSubmitHandler, ondeleteHandler }) {
       "genre": genre,
       "lead actor": leadActor,
       "rating": rating,
+      "displayOneMovie": movieforedit,
+      "selecttobepinned": movieforpinned,
       "language": language,
     };
-    onSubmitHandler(val);
+    // onSubmitHandler(val)
+    dispatch(saveaddMovie(val))
     clearState();
   };
   
@@ -80,6 +100,10 @@ export default function AddMember({ onSubmitHandler, ondeleteHandler }) {
     document.getElementById("clearDescription").value = "";
     document.getElementById("clearGenre").value = "";
     document.getElementById("clearActor").value = "";
+    document.getElementById("clearRating").value = "";
+    document.getElementById("clearMovieForEdit").value = "";
+    document.getElementById("clearMovieForPinned").value = "";
+    document.getElementById("clearLanguage").value = "";
   };
 
   //Clear the state
@@ -92,14 +116,16 @@ export default function AddMember({ onSubmitHandler, ondeleteHandler }) {
     setleadActor("");
     setRating("");
     setlanguage("");
+    setmovieforedit("");
+    setmovieforpinned("");
   };
 
     return (
         <div>
           <div
             style={{
-              width: "520px",
-              height: "520px",
+              width: "540px",
+              height: "560px",
               marginTop: "10px",
               marginLeft: "auto",
               marginRight: "auto",
@@ -112,7 +138,7 @@ export default function AddMember({ onSubmitHandler, ondeleteHandler }) {
               <div
                 style={{
                   width: "500px",
-                  height: "500px",
+                  height: "540px",
                   marginTop: "10px",
                   marginBottom: "10px",
                   marginRight: "auto",
@@ -316,6 +342,7 @@ export default function AddMember({ onSubmitHandler, ondeleteHandler }) {
                   Rating
                 </label>
                 <input
+                  id='clearRating'
                   onChange={onChangeRating}
                   style={{
                     float: "left",
@@ -329,6 +356,64 @@ export default function AddMember({ onSubmitHandler, ondeleteHandler }) {
                   maxLength={"10"}
                   placeholder={"Rating"}
                   name={"movieRating"}
+                ></input>
+                 <label
+                  style={{
+                    clear: "left",
+                    float: "left",
+                    width: "180px",
+                    marginLeft: "30px",
+                    marginBottom: "10px",
+                    color: "#19a8bb",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Movie for Edit
+                </label>
+                <input
+                  id="clearMovieForEdit"
+                  onChange={onChangeMovieForEdit}
+                  style={{
+                    float: "left",
+                    width: "200px",
+                    marginLeft: "5px",
+                    marginBottom: "10px",
+                    border: "1.5px solid #1ecae0",
+                    borderRadius: "5px",
+                  }}
+                  type={"text"}
+                  maxLength={"100"}
+                  placeholder={"True or False Movies for Edit"}
+                  name={"moviesForEdit"}
+                ></input>
+                 <label
+                  style={{
+                    clear: "left",
+                    float: "left",
+                    width: "180px",
+                    marginLeft: "30px",
+                    marginBottom: "10px",
+                    color: "#19a8bb",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Movie For Pinned
+                </label>
+                <input
+                  id="clearMovieForPinned"
+                  onChange={onChangeMovieForPinned}
+                  style={{
+                    float: "left",
+                    width: "200px",
+                    marginLeft: "5px",
+                    marginBottom: "10px",
+                    border: "1.5px solid #1ecae0",
+                    borderRadius: "5px",
+                  }}
+                  type={"text"}
+                  maxLength={"100"}
+                  placeholder={"True or False Movies for Pinned"}
+                  name={"moviesForPinned"}
                 ></input>
                 <label
                   style={{
@@ -344,6 +429,7 @@ export default function AddMember({ onSubmitHandler, ondeleteHandler }) {
                   Language
                 </label>
                 <input
+                  id='clearLanguage'
                   onChange={onChangeLanguage}
                   style={{
                     float: "left",

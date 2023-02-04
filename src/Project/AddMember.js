@@ -1,3 +1,6 @@
+import { useSelector, useDispatch } from 'react-redux';
+import {saveaddMovie} from '../AssignmentTwo/recordSlice'
+
 export default function AddMember({ onSubmitHandler, ondeleteHandler }) {
   
   const [idmovie, setidmovie] = React.useState("");
@@ -8,6 +11,8 @@ export default function AddMember({ onSubmitHandler, ondeleteHandler }) {
   const [leadActor, setleadActor] = React.useState("");
   const [rating, setRating] = React.useState("");
   const [language, setlanguage] = React.useState("");
+  
+  const dispatch = useDispatch();  
 
   function onChangeId(event) {
     setidmovie(event.target.value);
@@ -53,6 +58,7 @@ export default function AddMember({ onSubmitHandler, ondeleteHandler }) {
       "rating": rating,
       "language": language,
     };
+    dispatch(saveaddMovie(val));
     onSubmitHandler(val);
     clearState();
   };
