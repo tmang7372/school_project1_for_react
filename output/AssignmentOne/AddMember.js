@@ -1,9 +1,17 @@
+/*
+ Assignment 2
+ Ang Theow Meng
+ P7339041
+ I also add some function to ChooseGenre.jsx,
+ AddMember.jsx and Member.jsx
+ */
 import { useSelector, useDispatch } from 'react-redux';
 import { saveaddMovie } from "../AssignmentTwo/recordSlice.js";
 export default function AddMember({
   onSubmitHandler,
   ondeleteHandler
 }) {
+  //Set the useState of movieid, nameofmovie, displaympvie, description, genre, leadActor, rating and language
   const [idmovie, setidmovie] = React.useState("");
   const [nameofmovie, setnameofmovie] = React.useState("");
   const [displaymovie, setdisplaymovie] = React.useState("");
@@ -12,47 +20,77 @@ export default function AddMember({
   const [leadActor, setleadActor] = React.useState("");
   const [rating, setRating] = React.useState("");
   const [language, setlanguage] = React.useState("");
+  const [movieforedit, setmovieforedit] = React.useState("");
+  const [movieforpinned, setmovieforpinned] = React.useState("");
   const dispatch = useDispatch();
+
+  //Set the value of the movieid
   function onChangeId(event) {
     setidmovie(event.target.value);
   }
+
+  //Set the value of the name of movie
   function onChangeName(event) {
     setnameofmovie(event.target.value);
   }
+
+  //Set the value of the display
   function onChangeDisplay(event) {
     setdisplaymovie(event.target.value);
   }
+
+  //Set the value of the actor
   function onChangeActor(event) {
     setleadActor(event.target.value.split(","));
   }
+
+  //Set the value of the description
   function onChangeDescription(event) {
     setdescription(event.target.value);
   }
+
+  //Set the value of the genre
   function onChangeGenre(event) {
     setgenre(event.target.value);
   }
+
+  //Set the value of the rating
   function onChangeRating(event) {
     setRating(event.target.value);
   }
+
+  //Set the value of the language
   function onChangeLanguage(event) {
     setlanguage(event.target.value);
   }
+  function onChangeMovieForEdit(event) {
+    setmovieforedit(even.target.value);
+  }
+  function onChangeMovieForPinned(event) {
+    setmovieforpinned(even.target.value);
+  }
+
+  //Save the movie object to the movie list
   const transferValue = event => {
     event.preventDefault();
     const val = {
       "id": idmovie,
       "movie name": nameofmovie,
       "display": displaymovie,
-      "discription": description,
+      "description": description,
       "genre": genre,
       "lead actor": leadActor,
       "rating": rating,
+      "displayOneMovie": movieforedit,
+      "selecttobepinned": movieforpinned,
       "language": language
     };
+    // onSubmitHandler(val)
     dispatch(saveaddMovie(val));
-    onSubmitHandler(val);
     clearState();
   };
+
+  //Clear the value
   const onClearHandler = event => {
     document.getElementById("clearID").value = "";
     document.getElementById("clearMovieName").value = "";
@@ -60,7 +98,13 @@ export default function AddMember({
     document.getElementById("clearDescription").value = "";
     document.getElementById("clearGenre").value = "";
     document.getElementById("clearActor").value = "";
+    document.getElementById("clearRating").value = "";
+    document.getElementById("clearMovieForEdit").value = "";
+    document.getElementById("clearMovieForPinned").value = "";
+    document.getElementById("clearLanguage").value = "";
   };
+
+  //Clear the state
   const clearState = () => {
     setidmovie("");
     setnameofmovie("");
@@ -70,11 +114,13 @@ export default function AddMember({
     setleadActor("");
     setRating("");
     setlanguage("");
+    setmovieforedit("");
+    setmovieforpinned("");
   };
   return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     style: {
-      width: "520px",
-      height: "520px",
+      width: "540px",
+      height: "560px",
       marginTop: "10px",
       marginLeft: "auto",
       marginRight: "auto",
@@ -85,7 +131,7 @@ export default function AddMember({
   }, /*#__PURE__*/React.createElement("form", null, /*#__PURE__*/React.createElement("div", {
     style: {
       width: "500px",
-      height: "500px",
+      height: "540px",
       marginTop: "10px",
       marginBottom: "10px",
       marginRight: "auto",
@@ -258,6 +304,7 @@ export default function AddMember({
       fontWeight: "bold"
     }
   }, "Rating"), /*#__PURE__*/React.createElement("input", {
+    id: "clearRating",
     onChange: onChangeRating,
     style: {
       float: "left",
@@ -278,10 +325,61 @@ export default function AddMember({
       width: "180px",
       marginLeft: "30px",
       marginBottom: "10px",
+      color: "#19a8bb",
+      fontWeight: "bold"
+    }
+  }, "Movie for Edit"), /*#__PURE__*/React.createElement("input", {
+    id: "clearMovieForEdit",
+    onChange: onChangeMovieForEdit,
+    style: {
+      float: "left",
+      width: "200px",
+      marginLeft: "5px",
+      marginBottom: "10px",
+      border: "1.5px solid #1ecae0",
+      borderRadius: "5px"
+    },
+    type: "text",
+    maxLength: "100",
+    placeholder: "True or False Movies for Edit",
+    name: "moviesForEdit"
+  }), /*#__PURE__*/React.createElement("label", {
+    style: {
+      clear: "left",
+      float: "left",
+      width: "180px",
+      marginLeft: "30px",
+      marginBottom: "10px",
+      color: "#19a8bb",
+      fontWeight: "bold"
+    }
+  }, "Movie For Pinned"), /*#__PURE__*/React.createElement("input", {
+    id: "clearMovieForPinned",
+    onChange: onChangeMovieForPinned,
+    style: {
+      float: "left",
+      width: "200px",
+      marginLeft: "5px",
+      marginBottom: "10px",
+      border: "1.5px solid #1ecae0",
+      borderRadius: "5px"
+    },
+    type: "text",
+    maxLength: "100",
+    placeholder: "True or False Movies for Pinned",
+    name: "moviesForPinned"
+  }), /*#__PURE__*/React.createElement("label", {
+    style: {
+      clear: "left",
+      float: "left",
+      width: "180px",
+      marginLeft: "30px",
+      marginBottom: "10px",
       fontWeight: "bold",
       color: "#19a8bb"
     }
   }, "Language"), /*#__PURE__*/React.createElement("input", {
+    id: "clearLanguage",
     onChange: onChangeLanguage,
     style: {
       float: "left",
